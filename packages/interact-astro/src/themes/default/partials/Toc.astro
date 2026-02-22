@@ -1,0 +1,39 @@
+---
+
+const {headings} = Astro.props;
+---
+<nav class="toc-nav">
+    <h5 class="mb-3">Table of Contents</h5>
+    <ul class="list-unstyled">
+        {headings && headings.map((heading) => (
+                <li class={`toc-level-${heading.depth} mb-2`}>
+                    <a href={`#${heading.slug}`} class="text-decoration-none text-secondary">
+                        {heading.text}
+                    </a>
+                </li>
+        ))}
+    </ul>
+</nav>
+<style>
+    .toc-nav a:hover {
+        color: #000 !important;
+    }
+
+    .toc-level-1 {
+        font-weight: 500;
+    }
+
+    .toc-level-2 {
+        padding-left: 1rem;
+    }
+
+    .toc-level-3 {
+        padding-left: 2rem;
+        font-size: 0.875rem;
+    }
+
+    .toc-level-4 {
+        padding-left: 3rem;
+        font-size: 0.875rem;
+    }
+</style>

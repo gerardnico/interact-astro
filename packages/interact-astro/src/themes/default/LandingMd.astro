@@ -1,0 +1,9 @@
+---
+import type {LayoutProps} from "../../types";
+import Landing from "./Landing.astro";
+
+// The props for this component
+// https://docs.astro.build/en/reference/api-reference/#props
+const props = Astro.props as LayoutProps;
+---
+<Landing {...props.frontmatter}/>

@@ -1,0 +1,66 @@
+---
+import {config} from "@config"
+import {PAGE_CONTAINER} from "../style/classNames";
+import ImageLayout from "./ImageLayout.astro";
+// When building a site, pre rendered routes will receive a URL based on the site and base options
+let homeUrl = Astro.site.href
+const isDev = process.env.NODE_ENV === 'development';
+if (isDev) {
+    homeUrl = Astro.url.origin
+}
+
+// logo if svg
+// <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="#7611f7" data-name="logo" width="30" height="30" class="svg-cs d-inline-block align-text-top svg-icon-cs">
+
+// Determine if the image is an SVG based on the file extension
+let logoSrc: string | undefined;
+let logoAlt: string | undefined;
+let logoClass: string | undefined;
+let themeConfig = config.theme
+let navBarConfig = themeConfig.layouts.navBar;
+logoSrc = navBarConfig.logo.src;
+if (typeof logoSrc != 'undefined') {
+    const isSvg = logoSrc.endsWith('.svg');
+    logoClass = "d-inline-block align-text-top"
+    if (isSvg) {
+        logoClass += "svg-cs svg-icon-cs"
+    }
+    let logoAlt = navBarConfig.logo.alt;
+    if (typeof logoAlt == 'undefined') {
+        logoAlt = themeConfig.site.name;
+    }
+}
+---
+<!-- No bottom margin because the page may be a landing page, margin is driven by the content -->
+<header id="page-header" class="d-print-none">
+    <nav class="navbar navbar-expand-md navbar-light" data-type="fixed-top" style="background-color:var(--bs-light)">
+        <div class={PAGE_CONTAINER + " " + themeConfig.layouts.page.containerClass}>
+            <a class="link-primary"
+               href={homeUrl} title={themeConfig.site.title}
+               accesskey="h" style="font-weight:700">
+                {logoSrc ? (
+                        <ImageLayout src={logoSrc} alt={logoAlt} class={logoClass}
+                                     width={themeConfig.layouts.navBar.logo.width}
+                                     height={themeConfig.layouts.navBar.logo.height}/>) : ''}
+                {themeConfig.layouts.navBar.brandName != null &&
+                        <span class="btn navbar-brand"> themeConfig.layouts.navBar.brandName</span>}
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarcollapse"
+                    aria-controls="navbarcollapse" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div id="navbarcollapse" class="collapse navbar-collapse">
+                <!--                <ul class="navbar-nav me-auto">-->
+                <!--                    <li class="nav-item">-->
+                <!--                        <a class="link-internal nav-link text-secondary link-cs" data-bs-html="true"-->
+                <!--                           data-bs-placement="top" data-bs-toggle="tooltip"-->
+                <!--                           data-wiki-id="howto:getting_started:getting_started"-->
+                <!--                           href="/howto/how-to-get-started-with-combostrap-m3i8vga8" title=""-->
+                <!--                           data-bs-original-title="&lt;h3&gt;Get Started&lt;/h3&gt;-->
+                <!--&lt;p&gt;This page helps you to get started with ComboStrap&lt;/p&gt;">Get Started</a>-->
+                <!--                    </li>-->
+                <!--                </ul>-->
+            </div>
+        </div>
+    </nav>
+</header>

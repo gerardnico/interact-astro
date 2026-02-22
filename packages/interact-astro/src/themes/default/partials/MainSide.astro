@@ -1,0 +1,79 @@
+---
+import {Frontmatter} from "../../../types";
+import {MarkdownInstance} from "astro";
+import {
+    getFileNameWithoutExtensionFromFilePath,
+    getPageNameFromFilePath,
+    getDirectoryFromFilePath
+} from "../../../util/fs";
+
+// !!! Important
+// Get all pages to find siblings (Why? Vite’s import.meta.glob() function only supports static string literals. It does not support dynamic variables and string interpolation) See https://docs.astro.build/en/guides/imports/#supported-values
+const allPages = Object.values(import.meta.glob<MarkdownInstance<Frontmatter>>('/src/pages/**/*.{md,mdx,astro}', {eager: true}));
+
+// Find sibling pages (pages in the same directory)
+const currentDir = getDirectoryFromFilePath(Astro.url.pathname);
+const siblingPages = allPages
+    .filter(page => {
+        if (!page.url) return false;
+        // page url is the url path (ie /090603/mdm-obi-forum/soap-web-service)
+        const pageDir = getDirectoryFromFilePath(page.url);
+        // Check if in same directory and not the current page
+        return pageDir === currentDir;
+    })
+    .map(page => {
+        return ({
+            url: page.url,
+            title: page.frontmatter?.title || page.url?.split('/').pop()?.replace(/\.(md|mdx|astro)$/, '') || 'Untitled',
+            name: page.frontmatter?.name || page.url?.split('/').pop()?.replace(/\.(md|mdx|astro)$/, '') || getPageNameFromFilePath(page.file),
+            isIndex: getFileNameWithoutExtensionFromFilePath(page.file) == 'index'
+        })
+    })
+    .sort((a, b) => a.title.localeCompare(b.title));
+---
+{siblingPages.length > 0 && (
+<nav class="sibling-nav mb-4">
+    {siblingPages
+        .filter((page) => page.isIndex)
+        .map((page) => {
+            return (
+                    <h5 class="mb-3">
+                        <a href={page.url} class="text-decoration-none text-secondary">
+                            {page.name}
+                        </a></h5>
+            )
+        })}
+    <ul class="list-unstyled">
+        {siblingPages
+            .filter((page) => !page.isIndex)
+            .map((page) => {
+                return (
+                        <li class="mb-2">
+                            <a href={page.url} class="text-decoration-none text-secondary">
+                                {page.name}
+                            </a>
+                        </li>
+                )
+            })}
+    </ul>
+</nav>
+    )}
+<style>
+    .sibling-nav {
+        padding-bottom: 1.5rem;
+    }
+
+    .sibling-nav a {
+        display: block;
+        padding: 0.25rem 0;
+        transition: color 0.2s;
+    }
+
+    @media (max-width: 768px) {
+        .sibling-nav {
+            border-bottom: none;
+            padding-bottom: 0;
+            margin-bottom: 1.5rem;
+        }
+    }
+</style>

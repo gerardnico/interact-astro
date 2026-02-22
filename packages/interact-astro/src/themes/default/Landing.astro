@@ -1,0 +1,22 @@
+---
+import Head from "./partials/Head.astro";
+import NavBar from "./partials/NavBar.astro";
+import type {Frontmatter, LayoutProps} from "../../types";
+// The props for this component
+// https://docs.astro.build/en/reference/api-reference/#props
+interface Props extends Frontmatter{
+}
+const props = Astro.props ;
+---
+<!doctype html>
+<html lang="en" dir="ltr">
+<Head {...props}/>
+<body class="position-relative">
+<div id="page-core" class="position-relative">
+    <NavBar/>
+    <main id="main-content">
+        <slot/>
+    </main>
+</div>
+</body>
+</html>

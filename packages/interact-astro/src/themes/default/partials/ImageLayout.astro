@@ -1,0 +1,93 @@
+---
+// An image created with Astro components only
+// that supports svg or raster image as source
+
+import {Image} from 'astro:assets';
+import type {ImageMetadata} from 'astro';
+
+interface Props {
+    src: string;
+    alt?: string;
+    class?: string;
+    width?: number;
+    height?: number;
+    fill?: string;
+}
+
+const {src, alt, class: className = "", width = 30, height = 30, fill = "#7611f7"} = Astro.props;
+
+// Determine if the image is an SVG based on the file extension
+const isSvg = src.endsWith('.svg');
+
+// Check if the path starts with '/' (public folder) or is a full URL
+const isPublicOrRemote = src.startsWith('/') || src.startsWith('http');
+
+// Dynamically import the image if it's a local file in src/
+let importedImage: ImageMetadata | null = null;
+
+if (!isPublicOrRemote) {
+    try {
+        // Dynamically import images from src/ directory
+        const images = import.meta.glob<{
+            default: ImageMetadata
+        }>('/src/**/*.{png,jpg,jpeg,gif,webp,avif,svg}', {eager: true});
+
+        // Try different path variations
+        const possiblePaths = [
+            `/src/${src}`,
+            `/src/assets/${src}`,
+            `/src/images/${src}`,
+        ];
+
+        for (const path of possiblePaths) {
+            if (images[path]) {
+                importedImage = images[path].default;
+                break;
+            }
+        }
+    } catch (e) {
+        console.error(`Failed to import image: ${src}`, e);
+    }
+}
+
+// SVG properties
+const svgProps = {
+    fill: fill,
+    width: width.toString(),
+    height: height.toString(),
+    class: className
+};
+
+// Raster image properties
+const rasterProps = {
+    width: width,
+    height: height,
+    alt,
+    class: className
+};
+---
+
+{isSvg ? (
+    isPublicOrRemote ? (
+        // SVG from public/ or remote - use img tag
+    <img src={src} {...svgProps} alt={alt}/>
+        ) : importedImage ? (
+        // SVG from src/ - use img tag with imported src
+    <img src={importedImage.src} {...svgProps} alt={alt}/>
+        ) : (
+        // Fallback for SVG
+    <img src={src} {...svgProps} alt={alt}/>
+        )
+    ) : (
+    isPublicOrRemote ? (
+        // Raster image from public/ or remote - use regular img tag (Image component doesn't support public/ paths as strings)
+    <img src={src} {...rasterProps}/>
+        ) : importedImage ? (
+        // Raster image from src/ - use Image component with imported image
+
+    <Image src={importedImage} {...rasterProps}/>
+        ) : (
+        // Fallback - use regular img tag
+    <img src={src} {...rasterProps}/>
+        )
+    )}

@@ -1,0 +1,6 @@
+---
+import type {LayoutProps} from "../../types";
+import Hamburger from "./Hamburger.astro";
+const props = Astro.props as LayoutProps;
+---
+<Hamburger {...props.frontmatter}/>

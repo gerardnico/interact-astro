@@ -1,0 +1,37 @@
+{
+  "name": "@combostrap/interact",
+  "version": "0.1.0",
+  "description": "Interact",
+  "type": "module",
+  "files": [
+    "src"
+  ],
+  "bin": "src/cli/cli.ts",
+  "scripts": {
+    "clean": "rm -rf dist",
+    "create:components": "npm run cli create-components",
+    "generate:schema": "npm run cli generate-schema",
+    "print:config": "npm run cli print-config"
+  },
+  "keywords": [
+    "astro",
+    "astro-integration",
+    "remark"
+  ],
+  "dependencies": {
+    "@combostrap/interact-astro": "workspace:^",
+    "@oclif/core": "^4.8.0",
+    "@realfavicongenerator/generate-favicon": "^0.6.2",
+    "@realfavicongenerator/image-adapter-node": "^0.6.1",
+    "glob": "13.0.3",
+    "astro": "5.16.9"
+  },
+  "oclif": {
+    "description": "Interact Cli",
+    "version": "0.1.0",
+    "bin": "interact",
+    "dirname": "interact",
+    "commands": "./src/cli/commands",
+    "topicSeparator": " "
+  }
+}

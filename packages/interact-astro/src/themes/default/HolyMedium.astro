@@ -1,0 +1,45 @@
+---
+import Head from './partials/Head.astro';
+import themeConfig from "@config"
+import {PAGE_CONTAINER} from "./style/classNames";
+import {Frontmatter} from "../../types";
+interface Props extends Frontmatter {}
+const props = Astro.props;
+---
+<!doctype html>
+<html lang="en">
+<Head {...props}/>
+<body>
+<div class={PAGE_CONTAINER+" "+themeConfig.layouts.page.containerClass+" py-4"}>
+    <div class="row">
+        <main class="col-lg-9 col-md-8">
+            <slot/>
+        </main>
+    </div>
+</div>
+</body>
+</html>
+
+<style>
+
+    aside {
+        position: sticky;
+        top: 2rem;
+        max-height: calc(100vh - 4rem);
+        overflow-y: auto;
+    }
+
+    .sibling-nav {
+        padding-bottom: 1.5rem;
+        border-bottom: 1px solid #dee2e6;
+    }
+
+
+    @media (max-width: 768px) {
+        .sibling-nav {
+            border-bottom: none;
+            padding-bottom: 0;
+            margin-bottom: 1.5rem;
+        }
+    }
+</style>

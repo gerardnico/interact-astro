@@ -1,0 +1,26 @@
+---
+import Head from './partials/Head.astro';
+import Toc from "./partials/Toc.astro";
+import MainSide from "./partials/MainSide.astro";
+import type {Frontmatter, LayoutProps} from "../../types";
+import {PAGE_CONTAINER} from "./style/classNames";
+interface Props extends Frontmatter {
+}
+const props = Astro.props;
+import themeConfig from "@config"
+import NavBar from "./partials/NavBar.astro";
+---
+<!doctype html>
+<html lang="en" dir="ltr">
+<Head {...props}/>
+<body>
+<NavBar/>
+<div id="page-core" class={PAGE_CONTAINER + " " + themeConfig.layouts.page.containerClass + " position-relative mt-3"}>
+    <main id="page-main">
+        <div id="main-content">
+            <slot/>
+        </div>
+    </main>
+</div>
+</body>
+</html>

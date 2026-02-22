@@ -1,0 +1,20 @@
+{
+  "name": "@combostrap/interact-aggregator",
+  "version": "1.0.0",
+  "description": "Interact Aggregator Project",
+  "private": true,
+  "namespace": "@combostrap",
+  "workspaces": [
+    "packages/*"
+  ],
+  "scripts": {
+    "test": "yarn workspaces foreach run test",
+    "clean:global-cache": "rimraf ./.cache",
+    "check:install": "yarn dlx @yarnpkg/doctor@3.1.4 .",
+    "apps:build": "yarn workspaces foreach -ptv --include 'apps/*' run build",
+    "apps:clean": "yarn workspaces foreach -ptv --include 'apps/*' run clean",
+    "packages:build": "yarn workspaces foreach -ptv --include 'packages/*' run build",
+    "packages:clean": "yarn workspaces foreach -ptv --include 'packages/*' run clean"
+  },
+  "packageManager": "yarn@4.12.0"
+}
