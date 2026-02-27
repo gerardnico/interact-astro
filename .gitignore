@@ -18,6 +18,3 @@ dist
 # firebase local cache
 .firebase
 ui-debug.log
-
-# build
-dist

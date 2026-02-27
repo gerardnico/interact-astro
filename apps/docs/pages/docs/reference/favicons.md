@@ -1,4 +1,7 @@
-# Favicons generation
+---
+layout: holy
+title: Favicons generation
+---
 
 Favicons may be generated from a master svg file with the
 command [generate-favicons](https://github.com/gerardnico/interact-astro/blob/main/packages/interact/src/cli/commands/generate-favicon.ts)
