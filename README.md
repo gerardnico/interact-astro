@@ -1,13 +1,16 @@
-# Interact Documentation System in Astro
+# Documentation Framework on top of Astro
 
-This was an experiment to implement the interact documentation system in Astro.
+This was an experiment to create the next generation
+of [ComboWiki documentation system](https://www.combostrap.com)
+called `interact` on top of [Astro](https://astro.build/).
 
-You can read why we didn't choose Astro:
+You can read more about the elements developed and why we didn't choose it:
 
-* by start the site documentation by following the [steps below](#how-to-start-the-documentation-with-the-interact-cli)
-* or read the [index page](apps/docs/pages/index.md) directly
+* by starting the demo interact site documentation by following
+  the [steps below](#how-to-start-the-documentation-with-the-interact-cli)
+* or by reading the [index page](apps/docs/pages/index.md) directly
 
-## How to start the documentation with the interact cli
+## How to start the documentation with the Interact cli
 
 * Install [direnv](https://direnv.net/) or run [.envrc](.envrc) to install `ninteract` into your local bin
 
@@ -25,6 +28,7 @@ yarn install
 * Start the documentation website with [interact](./contrib/scripts/ninteract)
 
 ```bash
+cd apps/docs
 ninteract dev
 ```
 

@@ -1,78 +1,33 @@
 ---
 layout: holy
-title: Reasons why we didn't choose Astro as a platform to build on
+title: Interact on top of Astro project
 ---
 
-## Main Reason
+This project was an attempt to build a documentation framework on top of Astro
+with:
 
-* You don't build a framework on top of a framework
-* You live in the Astro world.
+* layout
+* image processing
+* and interactive component
 
-### Reason 1 - Astro Built-in component are Astro only
+## Why Not Astro for a framework
 
-#### Image/Picture Component
+See [Why Not](why-not.md)
 
-The image/picture is an Astro component and cannot be used in another Jsx component (
-React, ...)
+## The elements developed
 
-Still, we succeeded to
-implement [our own image React component on top of the Astro Service](https://github.com/gerardnico/interact-astro/blob/main/packages/interact-astro/src/components/Image/Image.tsx)
+At its core, interact astro is an [astro integration plugin](docs/reference/astro.md) with:
 
-#### Svg Import
+* a [cli](docs/reference/cli.md) on top of Astro
+* a [layout system](docs/reference/layout.md)
+* the import of [Svg as React component](docs/reference/svg.md)
+* [favicons generation](docs/reference/favicons.md)
+* [various unified plugin to change Markdown and mdx parsing](docs/reference/unified-plugins.md)
+* [various Publication Components](https://github.com/gerardnico/interact-astro/tree/main/packages/interact-astro/src/components) such
+  * as
+    the [React Image component on top of Astro service](https://github.com/gerardnico/interact-astro/blob/main/packages/interact-astro/src/components/Image/Image.tsx)
 
-* A Svg import imports a Astro component, you can't use it in a React Component. You need to hookup with a `svg?react`
-
-```javascript
-vite: {
-    plugins: [
-        // https://www.npmjs.com/package/vite-plugin-svgr
-        svgReactPlugin({
-            include: '**/*.svg?react',
-            svgrOptions: {
-                plugins: ['@svgr/plugin-svgo', '@svgr/plugin-jsx'],
-                svgoConfig: {
-                    plugins: ['preset-default', 'removeTitle', 'removeDesc', 'removeDoctype', 'cleanupIds'],
-                },
-            },
-        }),
-    ]
-}
-```
-
-### Reason 2 - Layout Handling
-
-You need to have 2 because for a Markdown file, you get fixed props.
-
-So you need one:
-
-* and one for normal pages
-* one for the Markdown pages (that calls the real layout)
-
-It would have been better to inject them all in a sort of big frontmatter, but you can't change that.
-
-* Image Components
-* Svg Import
-
-### Reason 3 - Collections are wrapper around vite glob import
-
-Collections are a wrapper around [vite glob import](https://vite.dev/guide/features#glob-import).
-(that's why the location for pages (`src/pages`) is a fixed directory)
-
-### Reason 4 - Markdown/Cms is static only
-
-* You can't inject component to Markdown, you can only do it on Mdx file.
-* You can't hook up in the Astro library to do it. Therefore, you are stuck with a static compile/bundle step when
-  writing Markdown
-  documentation. All CMS integration just output HTML, no React component at all.
-  (Mdx is JavaScript code and cannot be built to a React component without storing the JavaScript as module on the file
-  system. Node.js or any runtime does not allow it if there is any import in the code)
-
-### Reason 5 - No debug, it's not just JavaScript
-
-There is no debug in the IDEA, even a `debugger` word will not stop execution in your ide.
-The first [tips and tricks](https://docs.astro.build/en/guides/troubleshooting/) is the `console.log`
-
-## Further documentation
+## More documentation?
 
 Documentation was written while developing and can be
 found [here](https://github.com/gerardnico/interact-astro/blob/main/apps/docs/pages/docs/reference)
