@@ -8,9 +8,16 @@ const isDev = process.env.NODE_ENV === 'development';
 if (isDev) {
     homeUrl = Astro.url.origin
 }
+if (homeUrl.endsWith("/")) {
+    // normalization
+    // because a click on http://localhost//hallo
+    // goes to http://localhost
+    homeUrl = homeUrl.slice(0, homeUrl.length - 1)
+}
 let themeConfig = config.theme
 let siteBase = themeConfig.site.base;
 if (siteBase) {
+
     homeUrl = `${homeUrl}${siteBase}`
 }
 

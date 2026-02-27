@@ -96,4 +96,4 @@ You don't build a framework on top of a framework, you build it on top of a bund
 
 Astro is a Vite wrapper.
 
-![Astro and Vite Build command](../public/astro-and-vite-build.png)
+![Astro and Vite Build command](../public/astro-and-vite-build.jpg)
