@@ -6,9 +6,12 @@ called `interact` on top of [Astro](https://astro.build/).
 
 You can read more about the elements developed and why we didn't choose it:
 
-* by starting the demo interact site documentation by following
-  the [steps below](#how-to-start-the-documentation-with-the-interact-cli)
-* or by reading the [index page](apps/docs/pages/index.md) directly
+* by reading the `index page` on:
+  * the [Project Website](https://tools.gerardnico.com/interact-astro/)
+  * on the [Hosted GitHub Page](apps/docs/pages/index.md)
+
+* or by starting the demo interact site documentation by following
+  the [steps below](#how-to-start-the-documentation-with-the-interact-cli) - nerds only
 
 ## How to start the documentation with the Interact cli
 

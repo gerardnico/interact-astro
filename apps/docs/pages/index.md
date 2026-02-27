@@ -23,9 +23,11 @@ At its core, interact astro is an [astro integration plugin](docs/reference/astr
 * the import of [Svg as React component](docs/reference/svg.md)
 * [favicons generation](docs/reference/favicons.md)
 * [various unified plugin to change Markdown and mdx parsing](docs/reference/unified-plugins.md)
-* [various Publication Components](https://github.com/gerardnico/interact-astro/tree/main/packages/interact-astro/src/components) such
+* [various Publication Components](https://github.com/gerardnico/interact-astro/tree/main/packages/interact-astro/src/components)
+  such
   * as
     the [React Image component on top of Astro service](https://github.com/gerardnico/interact-astro/blob/main/packages/interact-astro/src/components/Image/Image.tsx)
+* a [Website GitHub deployment workflow with the Interact cli](https://github.com/gerardnico/interact-astro/blob/main/.github/workflows/deploy.yml)
 
 ## More documentation?
 
