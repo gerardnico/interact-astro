@@ -49,6 +49,10 @@ let pageTitle = headPageTitle + " | " + themeConfig.site.name
 //
 // The URL of the page requested so that relative path and anchor are calculated from it
 let baseHeadURL = Astro.request.url;
+const isDev = process.env.NODE_ENV === 'development';
+if (!isDev) {
+    baseHeadURL = themeConfig.site.url + url.pathname
+}
 if (isRoot) {
     // In the root, we need to add a slash otherwise the relative path is calculated
     // to the previous path
