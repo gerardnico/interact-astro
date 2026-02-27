@@ -1,12 +1,9 @@
 ---
-import Head from './partials/Head.astro';
-import Toc from "./partials/Toc.astro";
-import MainSide from "./partials/MainSide.astro";
-import type {LayoutProps} from "../../types";
-import themeConfig from "@config"
-import {PAGE_CONTAINER} from "./style/classNames";
+import type {LayoutProps} from "../../types/layout-mdx-props";
 import IndexMedium from "./IndexMedium.astro";
 
 const props = Astro.props as LayoutProps;
 ---
-<IndexMedium {...props.frontmatter}/>
+<IndexMedium {...props.frontmatter}>
+    <slot/>
+</IndexMedium>

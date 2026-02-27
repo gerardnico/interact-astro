@@ -1,4 +1,4 @@
-import {config} from '@combostrap/interact-astro/config'
+import {config} from '@gerardnico/interact-config'
 import {Args, Command, Flags} from '@oclif/core'
 import * as path from "path";
 import * as fs from "fs";

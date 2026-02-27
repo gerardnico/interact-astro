@@ -3,4 +3,6 @@ import type {LayoutProps} from "../../types";
 import Holy from "./Holy.astro";
 const props = Astro.props as LayoutProps;
 ---
-<Holy {...props.frontmatter}/>
+<Holy frontmatter={props.frontmatter} headings={props.headings}>
+    <slot/>
+</Holy>

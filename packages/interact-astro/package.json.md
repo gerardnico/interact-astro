@@ -3,7 +3,7 @@
 ## astro-integration keywords
 
 Why `astro-integration` as keywords
-It allows the use of the `astro add @combostrap/astro` command
+It allows the use of the `astro add @gerardnico/astro` command
 See [Ref](https://docs.astro.build/en/reference/integrations-reference/#allow-installation-with-astro-add)
 
 ## Dev Dependencies
@@ -28,13 +28,10 @@ See the [](src/types/astro.d.ts) used to define the types at runtime
 
 To generate the schema with [](../interact/src/cli/commands/generate-schema.ts)
 
-## real favicon
-
-Used to generate the favicon and the manifest [](../interact/src/cli/commands/generate-favicon.ts)
 
 ## Export
 
-Astro components: We export Astro components directly not through a barrel so that the typescript server
+Astro components: We export Astro components directly not through a barrel so that the TypeScript server
 is able to give intellisense and the user don't need to explode
 
 ## Dependencies
@@ -50,3 +47,17 @@ We use the version embedded with astro
 ```bash
 cat ../../node_modules/astro/package.json | grep zod
 ```
+
+
+## Types
+
+The `types` field does not work at all.
+`Typescript` uses only the type of imported file.
+We hooks then [index.d.ts](src/types/index.d.ts) to [astro.ts](src/astro/astro.ts)
+with a reference
+
+```javascript
+/// <reference path="../types/index.d.ts" />
+```
+
+Therefore, if the `astro.config.mjs` is in the `include` of `tsconfig.json` they will be imported.

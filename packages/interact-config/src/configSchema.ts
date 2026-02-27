@@ -1,6 +1,4 @@
 import {z} from 'astro/zod';
-import {getInteractPackageJson} from "../util/package-json-util";
-
 
 /**
  * It's not in a .d.ts file as they contain only TypeScript types (no runtime code)
@@ -13,7 +11,7 @@ const colorsSchema = z.object({
 })
 
 const image = z.object({
-    href: z.string(),
+    href: z.string().optional(),
     type: z.string().describe("The type (ie image/png or image/svg+xml)").optional(),
     width: z.number().optional(),
     height: z.number().optional(),
@@ -28,9 +26,10 @@ export type FaviconSetSchemaType = z.infer<typeof FaviconSetSchema>;
 
 const siteSchema = z.object({
     url: z.string().describe("The URL (Used in the sitemap)").optional(),
+    base: z.string().describe("Path added to the site URL (Example: /docs)").default(""),
     name: z.string().describe("The short name (used in the app manifest)").default("Website"),
     title: z.string().describe("The title (used on the logo description, as index page title, in the app manifest as name)").default("Website"),
-    masterFavicon: z.string().describe("The master svg favicon (used to generate the derivatives)").default("public/favicon.svg"),
+    masterFavicon: z.string().describe("The master svg favicon (used to generate the derived favicons)").default("public/favicon.svg"),
     favicons: FaviconSetSchema.describe("The favicons (logos)").optional(),
 }).describe("The site/app data")
 
@@ -74,7 +73,7 @@ let ThemeConfigSchema = z.object({
  */
 const ComponentsConfigSchema = z.object({
     // Physique path does not work well: ie with ./node_modules/`${interactPackageJson.name}/src/components`
-    // we get: could not resolve "./node_modules/@combostrap/interact-astro/src/components/H2/H2.tsx"
+    // we get: could not resolve "./node_modules/@gerardnico/interact-astro/src/components/H2/H2.tsx"
     // path below should be set in the exports of package.json
     // We derived them with import.meta.resolve
     importPath: z.string(),
@@ -82,17 +81,19 @@ const ComponentsConfigSchema = z.object({
 const ComponentsConfigSetSchema = z.record(z.string(), ComponentsConfigSchema.nullable());
 export type ComponentsConfigSetSchemaType = z.infer<typeof ComponentsConfigSetSchema>;
 
-let interactPackageJson = getInteractPackageJson();
 
-// No file system path, it's derived thanks to import and it does not work well with vite and import
+// No file system path, it's derived thanks to import, and it does not work well with vite and import
 // as they don't handle symlink well
-const interactComponentBaseDirectory = `${interactPackageJson.name}/components`
+const interactComponentBaseDirectory = `@gerardnico/interact-astro/components`
 const components: ComponentsConfigSetSchemaType = {
     "Avatar": {
         importPath: `${interactComponentBaseDirectory}/Avatar`
     },
     "Block": {
         importPath: `${interactComponentBaseDirectory}/Block`
+    },
+    "a": {
+        importPath: `${interactComponentBaseDirectory}/Anchor`
     },
     "h2": {
         importPath: `${interactComponentBaseDirectory}/H2`
@@ -159,6 +160,7 @@ function deepMerge(target, source) {
 
 
 export const ConfigSchema = z.object({
+    $schema: z.string().optional(),
     theme: ThemeConfigSchema.default(ThemeConfigSchema.parse({})),
     plugins: PluginConfigSetSchema.default(PluginConfigSetSchema.parse({})).transform(data => deepMerge(plugins, data)),
     components: ComponentsConfigSetSchema.default(ComponentsConfigSetSchema.parse({})).transform(data => deepMerge(components, data))

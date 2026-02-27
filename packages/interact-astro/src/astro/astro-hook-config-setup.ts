@@ -4,7 +4,8 @@ import {fileURLToPath} from "node:url";
 import {envField} from 'astro/config';
 import {glob} from 'glob';
 import instantiateUnifiedPlugins from "../config/instantiateUnifiedPlugins";
-import {configFileName, config as interactConfig} from "../config"
+import {configFileName, config as interactConfig} from "@gerardnico/interact-config"
+import svgReactPlugin from "vite-plugin-svgr";
 
 const unifiedPlugins = await instantiateUnifiedPlugins(interactConfig.plugins)
 
@@ -13,7 +14,7 @@ console.log(`${unifiedPlugins.remark.length} remark plugins`);
 
 
 import type {HookParameters} from 'astro';
-import {getPackageJsonDir} from "../util/package-json-util";
+import {getPackageJsonDir} from "@gerardnico/interact-config/utils";
 
 export const astroHookConfigSetup = async function (params: HookParameters<'astro:config:setup'>) {
     const {updateConfig, addWatchFile, config, command, logger} = params;
@@ -27,6 +28,7 @@ export const astroHookConfigSetup = async function (params: HookParameters<'astr
 
     // Update the Astro config to add the unified plugin
     updateConfig({
+        base: interactConfig.theme.site.base,
         // With trailingSlash: always
         // https://docs.astro.build/en/reference/configuration-reference/#trailingslash
         // The file 090603/mdm-obi-forum/index.md
@@ -87,7 +89,19 @@ export const astroHookConfigSetup = async function (params: HookParameters<'astr
                     '@interact': sourceProjectDir,
                     '@config': resolve(sourceProjectDir, 'config/index.ts')
                 }
-            }
+            },
+            plugins: [
+                // https://www.npmjs.com/package/vite-plugin-svgr
+                svgReactPlugin({
+                    include: '**/*.svg?react',
+                    svgrOptions: {
+                        plugins: ['@svgr/plugin-svgo', '@svgr/plugin-jsx'],
+                        svgoConfig: {
+                            plugins: ['preset-default', 'removeTitle', 'removeDesc', 'removeDoctype', 'cleanupIds'],
+                        },
+                    },
+                }),
+            ],
         }
     });
 

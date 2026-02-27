@@ -6,14 +6,28 @@ type textXAlignmentType = "start" | "center" | "end" |
     "md-start" | "md-center" | "md-end" |
     "lg-start" | "lg-center" | "lg-end" |
     "xl-start" | "xl-center" | "xl-end";
-export type SpacingSize = "0" | "xl-0" | "lg-0" | "md-0" |
-    "1" | "xl-1" | "lg-1" | "md-1" |
-    "2" | "xl-2" | "lg-2" | "md-2" |
-    "3" | "xl-3" | "lg-3" | "md-3" |
-    "4" | "xl-4" | "lg-4" | "md-4" |
-    "5" | "xl-5" | "lg-5" | "md-5";
-type BlockXAlignmentType = "start" | "end" | "center";
-type BlockYAlignmentType = "top" | "bottom" | "center";
+export type SpacingSize = "0" | "xl-0" | "lg-0" | "md-0" | "sm-0" |
+    "1" | "xl-1" | "lg-1" | "md-1" | "sm-1" |
+    "2" | "xl-2" | "lg-2" | "md-2" | "sm-2" |
+    "3" | "xl-3" | "lg-3" | "md-3" | "sm-3" |
+    "4" | "xl-4" | "lg-4" | "md-4" | "sm-4" |
+    "5" | "xl-5" | "lg-5" | "md-5" | "sm-5";
+type BlockXAlignmentType =
+    "start"
+    | "end"
+    | "center"
+    | "sm-start"
+    | "sm-center"
+    | "sm-end"
+    | "md-start"
+    | "md-center"
+    | "md-end"
+    | "lg-start"
+    | "lg-center"
+    | "lg-end"
+    | "xl-start"
+    | "xl-center"
+    | "xl-end";
 export type BlockType = React.HTMLAttributes<HTMLDivElement> & {
     // Hero exists because the padding 5 (p-5) is too small for a hero padding
     paddingHero?: "0" | "1" | "2" | "3"
@@ -32,9 +46,11 @@ export type BlockType = React.HTMLAttributes<HTMLDivElement> & {
     marginEnd?: SpacingSize[]
     marginBottom?: SpacingSize[]
     textAlign?: textXAlignmentType[]
-    blockXAlign?: BlockXAlignmentType
-    blockYAlign?: BlockYAlignmentType
-    maxWidth?: string
+    // An easy way to align in the center in a cell
+    // for other horizontal align needs, see Grid and Grid Cell
+    // in a publication, the flow goes top down, no need for Y alignment
+    blockXAlign?: BlockXAlignmentType[]
+    maxWidth?: string | 'auto'
 }
 export default function Block({
                                   padding,
@@ -53,13 +69,13 @@ export default function Block({
                                   marginBottom,
                                   className,
                                   blockXAlign,
-                                  blockYAlign,
                                   textAlign,
                                   maxWidth,
                                   style,
                                   children,
                                   ...rest
                               }: BlockType): React.JSX.Element {
+    const alignArray: BlockXAlignmentType[] | undefined = Array.isArray(blockXAlign) ? blockXAlign : (blockXAlign != undefined ? ((blockXAlign as string).split(" ") as BlockXAlignmentType[]) : undefined);
     return (
         <div className={clsx(
             className,
@@ -78,16 +94,11 @@ export default function Block({
             marginTop != undefined && marginTop.map((marginValue) => `mt-${marginValue}`),
             marginEnd != undefined && marginEnd.map((marginValue) => `me-${marginValue}`),
             marginBottom != undefined ? marginBottom.map((marginValue) => `mb-${marginValue}`) : "mb-3",
-            (blockXAlign != undefined || blockYAlign != undefined) && 'd-flex',
-            blockYAlign == 'top' && 'align-items-start',
-            blockYAlign == 'bottom' && 'align-items-end',
-            blockYAlign == 'center' && 'align-items-center',
-            blockXAlign == 'center' && 'justify-content-center',
-            blockXAlign == 'start' && 'justify-content-start',
-            blockXAlign == 'end' && 'justify-content-end',
+            // flex column so that they are aligned in a column
+            alignArray != undefined && alignArray.map((xAlignValue) => `align-items-${xAlignValue}`),
+            blockXAlign != undefined && 'd-flex flex-column',
             textAlign && `text-${textAlign}`
-        )
-        }
+        )}
              style={{...(maxWidth && {maxWidth: maxWidth}), ...style}}
              {...rest}>
             {children}

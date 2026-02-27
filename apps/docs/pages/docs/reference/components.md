@@ -16,21 +16,21 @@ Vite and Typescript handles it with alias but the IDE is not happy.
 * Create the directory
 
 ```bash
-mkdir -p ./node_modules/@combostrap/interact-components/src
+mkdir -p ./node_modules/@gerardnico/interact-components/src
 ```
 
 * Create the symlink with full path for each component
 
 ```bash
 # with full path !
-ln -s $PWD/node_modules/@combostrap/interact-astro/src/components/StarRating/StarRating.tsx  $PWD/node_modules/@combostrap/interact-components/src/StarRating.tsx
+ln -s $PWD/node_modules/@gerardnico/interact-astro/src/components/StarRating/StarRating.tsx  $PWD/node_modules/@gerardnico/interact-components/src/StarRating.tsx
 ```
 
-* Create the `./node_modules/@combostrap/interact-components/package.json` file
+* Create the `./node_modules/@gerardnico/interact-components/package.json` file
 
 ```json
 {
-  "name": "@combostrap/interact-components",
+  "name": "@gerardnico/interact-components",
   "version": "0.1.0",
   "description": "Interact Components",
   "type": "module",

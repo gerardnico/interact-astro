@@ -1,13 +1,11 @@
 ---
 import Head from './partials/Head.astro';
-import Toc from "./partials/Toc.astro";
-import MainSide from "./partials/MainSide.astro";
-import type {Frontmatter, LayoutProps} from "../../types";
+import type {Frontmatter} from "../../types";
 import {PAGE_CONTAINER} from "./style/classNames";
 interface Props extends Frontmatter {
 }
 const props = Astro.props;
-import themeConfig from "@config"
+import themeConfig from "@gerardnico/interact-config"
 import NavBar from "./partials/NavBar.astro";
 ---
 <!doctype html>

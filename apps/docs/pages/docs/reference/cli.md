@@ -29,7 +29,7 @@ interact print-config -- --filter theme.colors --json
 Generates a JSON schema file from the Zod configuration schema. The schema is output to `dist/schemas/interact.schema.json`.
 
 ### `create-components`
-Creates a virtual components module in `node_modules/@combostrap/interact-components` with exports for all configured components.
+Creates a virtual components module in `node_modules/@gerardnico/interact-components` with exports for all configured components.
 
 ### `print-config`
 Prints the interact configuration to the terminal. Outputs as YAML by default with pretty printing (colors and alignment).

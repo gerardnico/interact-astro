@@ -1,9 +1,9 @@
 import {visit} from "unist-util-visit";
-import type {MdxjsEsm, MdxJsxFlowElement} from 'mdast-util-mdx';
+import type {MdxjsEsm} from 'mdast-util-mdx';
 import type {ImportDeclaration, Property} from 'estree'
 import type {Heading, Root} from 'mdast';
 import {VFile} from "vfile";
-import {ComponentsConfigSetSchemaType} from "../config/configSchema";
+import {ComponentsConfigSetSchemaType} from "@gerardnico/interact-config/schema";
 
 type ComponentMap = {
     [htmlElement: string]: string;
@@ -137,6 +137,10 @@ export default function remarkMdxCustomHtmlComponent(components: ComponentsConfi
 
     return function transformer(tree: Root, file: VFile) {
 
+        if (file.extname != '.mdx') {
+            // only for mdx file as we add import
+            return;
+        }
         const foundComponents: ComponentMap = {};
 
         // Visit

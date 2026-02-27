@@ -1,14 +1,10 @@
 import {visit} from "unist-util-visit";
 import type {Root} from 'hast'
 
-/**
- * The pattern to search in href
- */
-const publicPattern = '/public/';
 
 /**
- * Astro path does not have the md or mdx extension but the link checker needs them
- * This plugin will delete the markdown extension from a link
+ * Astro path does not have the md or mdx extension but the link checker (editor or cli) needs them
+ * This plugin will delete the Markdown extension from a link
  *
  * Example:
  * * /docs/getting-started.md → /docs/getting-started
@@ -20,9 +16,11 @@ const publicPattern = '/public/';
  * Remove also the public
  * * ../../../public/static/file.pdf -> /static/file.pdf
  *
+ * @param publicPattern - the public pattern to search in href
+ * @param target - the external link target
  * @returns {(function(*): void)|*}
  */
-export default function rehypeHrefRewrite() {
+export default function rehypeHrefRewrite(publicPattern = '/public/', target = "_blank"): ((publicPattern: string) => void) | any {
     return function transformer(tree: Root) {
         visit(tree, "element", (node) => {
             if (
@@ -32,10 +30,14 @@ export default function rehypeHrefRewrite() {
             ) {
                 const href = node.properties.href;
 
-                // Skip external, hash, absolute, and mailto links
                 if (
                     href.startsWith("http://") ||
-                    href.startsWith("https://") ||
+                    href.startsWith("https://")) {
+                    node.properties.target = target
+                    return;
+                }
+                // Skip external, hash, absolute, and mailto links
+                if (
                     href.startsWith("#") ||
                     href.startsWith("mailto:") ||
                     href.startsWith("/")

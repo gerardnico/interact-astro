@@ -2,9 +2,9 @@ import {Command} from '@oclif/core'
 import fs from 'fs'
 import path from 'path'
 
-import {ComponentsConfigSetSchemaType} from '../../../../interact-astro/src/config/configSchema'
-import {config as interactConfig} from '../../../../interact-astro/src/config'
-import {getPackageJsonDir} from "../../../../interact-astro/src/util/package-json-util";
+import {ComponentsConfigSetSchemaType} from '@gerardnico/interact-config/schema'
+import {config as interactConfig} from '@gerardnico/interact-config'
+import {getPackageJsonDir} from "@gerardnico/interact-config/utils";
 import {realpathSync} from 'fs';
 import {fileURLToPath} from 'url';
 
@@ -113,7 +113,7 @@ export default class CreateComponents extends Command {
         await this.parse(CreateComponents)
 
         const appDirectory = getPackageJsonDir(process.cwd(), false)
-        const moduleName = '@combostrap/interact-components'
+        const moduleName = '@gerardnico/interact-components'
         const moduleDest = path.resolve(appDirectory, 'node_modules', moduleName)
         createComponentsModule(moduleName, moduleDest, interactConfig.components)
     }

@@ -1,0 +1,61 @@
+{
+  "name": "@gerardnico/interact-markdown",
+  "version": "0.1.0",
+  "type": "module",
+  "scripts": {
+    "build": "tsc",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "test:ui": "vitest --ui"
+  },
+  "main": "src/Marki.ts",
+  "dependencies": {
+    "acorn": "*",
+    "hast-util-raw": "*",
+    "hast-util-to-dom": "*",
+    "hast-util-to-html": "*",
+    "hast-util-to-jsx-runtime": "*",
+    "hastscript": "*",
+    "mdast-util-from-markdown": "*",
+    "mdast-util-gfm-autolink-literal": "*",
+    "mdast-util-mdx-jsx": "*",
+    "mdast-util-to-hast": "*",
+    "micromark": "*",
+    "micromark-extension-gfm-autolink-literal": "*",
+    "micromark-extension-mdx-jsx": "*",
+    "rehype-document": "*",
+    "rehype-format": "*",
+    "rehype-raw": "*",
+    "rehype-react": "*",
+    "rehype-stringify": "*",
+    "remark": "*",
+    "remark-mdx": "*",
+    "remark-parse": "*",
+    "remark-rehype": "*",
+    "unified": "*",
+    "unist-util-visit-parents": "*"
+  },
+  "peerDependencies": {
+    "react": "*",
+    "react-dom": "*"
+  },
+  "devDependencies": {
+    "@testing-library/jest-dom": "*",
+    "@types/hast": "*",
+    "@types/jest": "*",
+    "@types/jsdom": "*",
+    "@types/mdast": "*",
+    "@types/react": "*",
+    "@types/react-dom": "*",
+    "@xmldom/xmldom": "0.8.11",
+    "css-to-xpath": "0.1.0",
+    "jsdom": "*",
+    "react": "*",
+    "react-dom": "*",
+    "unist-util-select": "5.1.0",
+    "vfile-reporter": "7.0.5",
+    "vite": "*",
+    "vitest": "*",
+    "xpath": "0.0.32"
+  }
+}

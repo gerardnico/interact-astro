@@ -1,6 +1,6 @@
 import {Command} from '@oclif/core'
 import {zodToJsonSchema} from 'zod-to-json-schema'
-import {ConfigSchema} from '../../../../interact-astro/src/config/configSchema'
+import {ConfigSchema} from '@gerardnico/interact-config/schema'
 import {writeFileSync, mkdirSync} from 'fs'
 import {join} from 'path'
 

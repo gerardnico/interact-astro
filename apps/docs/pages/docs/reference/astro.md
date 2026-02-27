@@ -1,3 +1,6 @@
+---
+layout: hamburger
+---
 # Astro plugin
 
 This page shows you how to interact `interact` as Astro plugin
@@ -6,12 +9,12 @@ This page shows you how to interact `interact` as Astro plugin
 
 ### Manually
 
-* Add interact as a [dependency](installation.md)
+* Add interact as a [dependency](installation.mdx)
 * Configure your `astro.config.mjs`
 
 ```javascript
 import {defineConfig} from 'astro/config';
-import interact from '@combostrap/interact/astro';
+import interact from '@gerardnico/interact/astro';
 
 export default defineConfig({
     integrations: [
@@ -23,5 +26,5 @@ export default defineConfig({
 ### With Astro Add
 
 ```bash
-yarn astro add @combostrap/interact
+yarn astro add @gerardnico/interact
 ```

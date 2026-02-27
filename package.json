@@ -1,9 +1,9 @@
 {
-  "name": "@combostrap/interact-aggregator",
+  "name": "@gerardnico/interact-aggregator",
   "version": "1.0.0",
   "description": "Interact Aggregator Project",
   "private": true,
-  "namespace": "@combostrap",
+  "namespace": "@gerardnico",
   "workspaces": [
     "packages/*"
   ],
@@ -16,5 +16,31 @@
     "packages:build": "yarn workspaces foreach -ptv --include 'packages/*' run build",
     "packages:clean": "yarn workspaces foreach -ptv --include 'packages/*' run clean"
   },
-  "packageManager": "yarn@4.12.0"
+  "packageManager": "yarn@4.12.0",
+  "dependencies": {
+    "@astrojs/mdx": "^4.3.13",
+    "@astrojs/react": "^4.4.2",
+    "@astrojs/sitemap": "^3.7.0",
+    "astro": "5.16.9",
+    "react": "^19.2.4",
+    "react-dom": "^19.2.4",
+    "vite": "6.4.1",
+    "yaml": "^2.7.0"
+  },
+  "devDependencies": {
+    "@types/jsdom": "^27.0.0",
+    "@types/mdast": "4.0.4",
+    "@types/react": "19.2.4",
+    "@types/react-dom": "19.2.3",
+    "jsdom": "28.1.0",
+    "tsx": "4.21.0",
+    "typescript": "5.9.3",
+    "vitest": "4.0.18"
+  },
+  "engines": {
+    "node": ">=22"
+  },
+  "resolutions": {
+    "vite": "6.4.1"
+  }
 }

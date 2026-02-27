@@ -14,7 +14,7 @@ import fs from "fs";
  */
 export function getPackageJsonDir(startDir: string, firstAncestor: boolean = true) {
     let current = startDir
-    let result = null
+    let result: string | undefined
 
     while (true) {
         if (existsSync(join(current, 'package.json'))) {

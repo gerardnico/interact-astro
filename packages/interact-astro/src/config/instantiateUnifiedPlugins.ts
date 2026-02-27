@@ -1,5 +1,5 @@
 // Instantiate the unified plugins
-import {PluginConfig, PluginConfigSetSchemaType} from "./configSchema";
+import {PluginConfig, PluginConfigSetSchemaType} from "@gerardnico/interact-config/schema";
 import path from 'path';
 import {fileURLToPath} from "node:url";
 

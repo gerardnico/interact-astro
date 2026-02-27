@@ -35,8 +35,7 @@ export default function layoutWrapper() {
             }
         }
 
-        // @interact is a vite alias
-        frontmatter.layout = `@interact/themes/default/${layoutName}Md.astro`;
+        frontmatter.layout = `@gerardnico/interact-astro/layout/${layoutName}Md`;
 
         // We could have wrapped with the below code but the TOC is then gone
         // because it's created from the first level heading, and they will become a second level

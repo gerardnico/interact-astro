@@ -2,7 +2,7 @@ import {visit} from "unist-util-visit";
 import type {MdxjsEsm, MdxJsxFlowElement} from 'mdast-util-mdx';
 import type {Root} from 'mdast';
 import {VFile} from "vfile";
-import {ComponentsConfigSetSchemaType} from "../config/configSchema";
+import {ComponentsConfigSetSchemaType} from "@gerardnico/interact-config/schema";
 
 import {isCustomTag} from "./remark-mdx-custom-html-component";
 
