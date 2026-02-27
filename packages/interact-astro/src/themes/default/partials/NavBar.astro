@@ -8,6 +8,11 @@ const isDev = process.env.NODE_ENV === 'development';
 if (isDev) {
     homeUrl = Astro.url.origin
 }
+let themeConfig = config.theme
+let siteBase = themeConfig.site.base;
+if (siteBase) {
+    homeUrl = `${homeUrl}${siteBase}`
+}
 
 // logo if svg
 // <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="#7611f7" data-name="logo" width="30" height="30" class="svg-cs d-inline-block align-text-top svg-icon-cs">
@@ -16,7 +21,6 @@ if (isDev) {
 let logoSrc: string | undefined;
 let logoAlt: string | undefined;
 let logoClass: string | undefined;
-let themeConfig = config.theme
 let navBarConfig = themeConfig.layouts.navBar;
 logoSrc = navBarConfig.logo.src;
 if (typeof logoSrc != 'undefined') {
@@ -28,6 +32,14 @@ if (typeof logoSrc != 'undefined') {
     let logoAlt = navBarConfig.logo.alt;
     if (typeof logoAlt == 'undefined') {
         logoAlt = themeConfig.site.name;
+    }
+
+    if (siteBase) {
+        let logoPathSep = "";
+        if (!logoSrc.startsWith("/")) {
+            logoPathSep = "/"
+        }
+        logoSrc = `${siteBase}${logoPathSep}${logoSrc}`
     }
 }
 ---

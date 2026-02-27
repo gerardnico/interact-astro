@@ -2,6 +2,8 @@
   "$schema": "../../packages/interact-config/resources/schemas/interact.schema.json",
   "theme": {
     "site": {
+      "base": "/interact-astro",
+      "url": "https://tools.gerardnico.com",
       "name": "Interact Astro",
       "title": "An interact Astro experiment",
       "masterFavicon": "public/letter-n-icon.svg"
@@ -10,7 +12,7 @@
       "navBar": {
         "brandName": "Interact",
         "logo": {
-          "src": "/letter-n-icon.svg",
+          "src": "letter-n-icon.svg",
           "alt": "interact",
           "width": 20,
           "height": 20
@@ -28,5 +30,4 @@
     "remark-frontmatter-modified-time": null,
     "remark-mdx-component-import": null
   }
-
 }

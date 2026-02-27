@@ -1,5 +1,6 @@
 import {visit} from "unist-util-visit";
 import type {Root} from 'hast'
+import {removePublicPart} from "./unified-util";
 
 
 /**
@@ -16,13 +17,37 @@ import type {Root} from 'hast'
  * Remove also the public
  * * ../../../public/static/file.pdf -> /static/file.pdf
  *
- * @param publicPattern - the public pattern to search in href
+ * @param publicDirName - the dir name
  * @param target - the external link target
+ * @param base - the site base
  * @returns {(function(*): void)|*}
  */
-export default function rehypeHrefRewrite(publicPattern = '/public/', target = "_blank"): ((publicPattern: string) => void) | any {
+export default function rehypeHrefRewrite({publicDirName = 'public', target = "_blank", base = ''}: {
+    publicDirName: string,
+    target: string,
+    base: string
+}): ((publicPattern: string) => void) | any {
     return function transformer(tree: Root) {
-        visit(tree, "element", (node) => {
+        visit(tree, "element", node => {
+
+            if (node.tagName === "img" &&
+                node.properties &&
+                typeof node.properties.src === "string") {
+                if (!base) {
+                    return;
+                }
+                // with an image the full path should be given
+                // the base head HTML element has no effect
+                if (node.properties.src.startsWith("http")) {
+                    return;
+                }
+                if (node.properties.src.endsWith(base)) {
+                    return
+                }
+                node.properties.src = `${base}${node.properties.src}`
+                return;
+            }
+
             if (
                 node.tagName === "a" &&
                 node.properties &&
@@ -58,12 +83,11 @@ export default function rehypeHrefRewrite(publicPattern = '/public/', target = "
                 node.properties.href = href.replace(/(\.mdx?|\/index\.mdx?)$/, "");
 
                 // Remove the public part
-                // ie
-                const publicIndex = node.properties.href.indexOf(publicPattern)
-                if (publicIndex == -1) {
-                    return;
-                }
-                node.properties.href = node.properties.href.slice(publicIndex + publicPattern.length)
+                node.properties.href = removePublicPart({
+                    relativePath: node.properties.href,
+                    publicDirName: publicDirName,
+                    absolute: false,
+                })
             }
         });
     };

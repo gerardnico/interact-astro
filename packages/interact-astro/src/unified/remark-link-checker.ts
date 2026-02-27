@@ -1,8 +1,10 @@
 import fs from 'fs';
 import path from 'path';
 import {visit} from 'unist-util-visit';
-import type {Root} from "mdast";
+import type {Link, Root} from "mdast";
 import {VFile} from "vfile";
+import {is} from 'unist-util-is'
+import {removePublicPart} from "./unified-util";
 
 const MD_EXT_RE = /\.(md|mdx)$/i;
 
@@ -21,7 +23,21 @@ export default function remarkLinkChecker({
         const currentFileDir = path.dirname(vFile.path);
         const pagesRoot = path.resolve(process.cwd(), pagesDir);
 
-        visit(tree, 'link', (node) => {
+        visit(tree, (node) => {
+
+            if (is(node, 'image')) {
+                /**
+                 * Why absolute true?
+                 * For the astro img in Markdown, the path should not be relative
+                 * Otherwise we get: Cannot find module 'astro-and-vite-build.png' imported from markdownPathPage
+                 */
+                node.url = removePublicPart({relativePath: node.url, absolute: true})
+                return;
+            }
+
+            if (!is(node, 'link')) {
+                return;
+            }
             const url = node.url;
             if (typeof url !== 'string') return;
 

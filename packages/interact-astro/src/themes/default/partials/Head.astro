@@ -38,6 +38,8 @@ if (!headPageTitle && isRoot) {
     headPageTitle = themeConfig.site.title || 'Default'
 }
 let pageTitle = headPageTitle + " | " + themeConfig.site.name
+// base so that relative path are calculated relative to this URL
+let base = url + (themeConfig.site.base || '');
 ---
 <head>
     <meta charset="UTF-8"/>
@@ -45,6 +47,7 @@ let pageTitle = headPageTitle + " | " + themeConfig.site.name
     <!-- https://docs.astro.build/en/reference/api-reference/#generator -->
     <meta name="generator" content={Astro.generator}/>
     <meta name="generator" content="Interact"/>
+    <base href={base}>
     {description &&
             <meta name="description" content={description}>}
     <title>{pageTitle}</title>

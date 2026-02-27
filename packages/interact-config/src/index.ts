@@ -16,7 +16,6 @@ export interface ConfigSource {
 export const configFileName = 'interact.config.json';
 
 
-
 // Based on https://realfavicongenerator.net
 let defaultFavicons: FaviconSetSchemaType = {
     "favicon.ico": {
@@ -46,8 +45,8 @@ let defaultFavicons: FaviconSetSchemaType = {
 };
 
 function updateFavicon(favicons?: FaviconSetSchemaType): FaviconSetSchemaType {
-    if(!favicons){
-        favicons={}
+    if (!favicons) {
+        favicons = {}
     }
     for (let [faviconName, faviconProperties] of Object.entries(defaultFavicons)) {
         if (faviconName in Object.keys(favicons)) {
@@ -106,6 +105,17 @@ async function loadConfig(): Promise<ConfigSource> {
     }
 
     result.data.theme.site.favicons = updateFavicon(result.data.theme.site.favicons);
+    let rehypeHrefRewrite = result.data.plugins["rehype-href-rewrite"];
+    if (rehypeHrefRewrite != null) {
+        let baseValue = result.data.theme.site?.base;
+        if (typeof rehypeHrefRewrite.props === 'undefined') {
+            rehypeHrefRewrite.props = {
+                base: baseValue,
+            }
+        } else {
+            rehypeHrefRewrite.props.base = baseValue;
+        }
+    }
     return {
         config: result.data,
         loaded: true,
