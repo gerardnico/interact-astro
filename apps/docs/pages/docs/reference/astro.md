@@ -1,16 +1,16 @@
 ---
-layout: hamburger
+layout: holy
+title: Astro plugin
 ---
 
-# Astro plugin
 
-This page shows you how to add the [Interact Astro plugin](../../../../../packages/interact-astro/src/astro/astro.ts)
+This page shows you how to add the [Interact Astro plugin](https://github.com/gerardnico/interact-astro/blob/main/packages/interact-astro/src/astro/astro.ts)
 
 ## Installation
 
 ### Manually
 
-* Add interact as a [dependency](installation.mdx)
+* Add interact as a [dependency](installation.md)
 * Configure your `astro.config.mjs`
 
 ```javascript
