@@ -1,0 +1,331 @@
+{
+  "$ref": "#/definitions/InteractConfig",
+  "definitions": {
+    "InteractConfig": {
+      "type": "object",
+      "properties": {
+        "$schema": {
+          "type": "string"
+        },
+        "theme": {
+          "type": "object",
+          "properties": {
+            "colors": {
+              "type": "object",
+              "properties": {
+                "defaultMode": {
+                  "type": "string",
+                  "enum": [
+                    "light",
+                    "dark"
+                  ],
+                  "default": "light"
+                },
+                "primary": {
+                  "type": "string",
+                  "default": "#906296"
+                }
+              },
+              "additionalProperties": false,
+              "default": {
+                "defaultMode": "light",
+                "primary": "#906296"
+              }
+            },
+            "site": {
+              "type": "object",
+              "properties": {
+                "url": {
+                  "type": "string",
+                  "description": "The URL (Used in the sitemap)"
+                },
+                "base": {
+                  "type": "string",
+                  "description": "Path added to the site URL (Example: /docs)",
+                  "default": ""
+                },
+                "name": {
+                  "type": "string",
+                  "description": "The short name (used in the app manifest)",
+                  "default": "Website"
+                },
+                "title": {
+                  "type": "string",
+                  "description": "The title (used on the logo description, as index page title, in the app manifest as name)",
+                  "default": "Website"
+                },
+                "masterFavicon": {
+                  "type": "string",
+                  "description": "The master svg favicon (used to generate the derived favicons)",
+                  "default": "public/favicon.svg"
+                },
+                "favicons": {
+                  "type": "object",
+                  "additionalProperties": {
+                    "anyOf": [
+                      {
+                        "type": "object",
+                        "properties": {
+                          "rel": {
+                            "type": "string",
+                            "enum": [
+                              "shortcut icon",
+                              "icon",
+                              "apple-touch-icon"
+                            ],
+                            "description": "The link rel (ie the type)"
+                          },
+                          "image": {
+                            "type": "object",
+                            "properties": {
+                              "href": {
+                                "type": "string"
+                              },
+                              "type": {
+                                "type": "string",
+                                "description": "The type (ie image/png or image/svg+xml)"
+                              },
+                              "width": {
+                                "type": "number"
+                              },
+                              "height": {
+                                "type": "number"
+                              }
+                            },
+                            "additionalProperties": false,
+                            "description": "The image"
+                          }
+                        },
+                        "required": [
+                          "rel"
+                        ],
+                        "additionalProperties": false,
+                        "description": "A favicon image"
+                      },
+                      {
+                        "type": "null"
+                      }
+                    ],
+                    "description": "A favicon image"
+                  },
+                  "description": "The favicons (logos)"
+                }
+              },
+              "additionalProperties": false,
+              "description": "The site/app data",
+              "default": {
+                "base": "",
+                "name": "Website",
+                "title": "Website",
+                "masterFavicon": "public/favicon.svg"
+              }
+            },
+            "layouts": {
+              "type": "object",
+              "properties": {
+                "navBar": {
+                  "type": "object",
+                  "properties": {
+                    "brandName": {
+                      "anyOf": [
+                        {
+                          "type": "string",
+                          "default": "Brand"
+                        },
+                        {
+                          "type": "null"
+                        }
+                      ]
+                    },
+                    "logo": {
+                      "type": "object",
+                      "properties": {
+                        "src": {
+                          "type": "string",
+                          "default": "/favicon.svg"
+                        },
+                        "alt": {
+                          "type": "string"
+                        },
+                        "width": {
+                          "type": "number",
+                          "default": 24
+                        },
+                        "height": {
+                          "type": "number",
+                          "default": 24
+                        }
+                      },
+                      "additionalProperties": false,
+                      "default": {
+                        "src": "/favicon.svg",
+                        "width": 24,
+                        "height": 24
+                      }
+                    }
+                  },
+                  "additionalProperties": false,
+                  "default": {
+                    "brandName": "Brand",
+                    "logo": {
+                      "src": "/favicon.svg",
+                      "width": 24,
+                      "height": 24
+                    }
+                  }
+                },
+                "toc": {
+                  "type": "object",
+                  "properties": {
+                    "minItems": {
+                      "type": "number",
+                      "default": 2
+                    },
+                    "maxDepth": {
+                      "type": "number",
+                      "default": 3
+                    }
+                  },
+                  "additionalProperties": false,
+                  "default": {
+                    "minItems": 2,
+                    "maxDepth": 3
+                  }
+                },
+                "page": {
+                  "type": "object",
+                  "properties": {
+                    "containerClass": {
+                      "type": "string",
+                      "enum": [
+                        "container",
+                        "container-fluid",
+                        "container-sm",
+                        "container-md",
+                        "container-lg",
+                        "container-xl",
+                        "container-xxl"
+                      ],
+                      "default": "container"
+                    },
+                    "containerMaxWidth": {
+                      "type": "string"
+                    }
+                  },
+                  "additionalProperties": false,
+                  "default": {
+                    "containerClass": "container"
+                  }
+                }
+              },
+              "additionalProperties": false,
+              "default": {
+                "navBar": {
+                  "brandName": "Brand",
+                  "logo": {
+                    "src": "/favicon.svg",
+                    "width": 24,
+                    "height": 24
+                  }
+                },
+                "toc": {
+                  "minItems": 2,
+                  "maxDepth": 3
+                },
+                "page": {
+                  "containerClass": "container"
+                }
+              }
+            }
+          },
+          "additionalProperties": false,
+          "default": {
+            "colors": {
+              "defaultMode": "light",
+              "primary": "#906296"
+            },
+            "site": {
+              "base": "",
+              "name": "Website",
+              "title": "Website",
+              "masterFavicon": "public/favicon.svg"
+            },
+            "layouts": {
+              "navBar": {
+                "brandName": "Brand",
+                "logo": {
+                  "src": "/favicon.svg",
+                  "width": 24,
+                  "height": 24
+                }
+              },
+              "toc": {
+                "minItems": 2,
+                "maxDepth": 3
+              },
+              "page": {
+                "containerClass": "container"
+              }
+            }
+          }
+        },
+        "plugins": {
+          "type": "object",
+          "additionalProperties": {
+            "anyOf": [
+              {
+                "type": "object",
+                "properties": {
+                  "path": {
+                    "type": "string"
+                  },
+                  "props": {
+                    "type": "object",
+                    "additionalProperties": {}
+                  },
+                  "type": {
+                    "type": "string",
+                    "enum": [
+                      "remark",
+                      "rehype"
+                    ]
+                  }
+                },
+                "additionalProperties": false
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "default": {}
+        },
+        "components": {
+          "type": "object",
+          "additionalProperties": {
+            "anyOf": [
+              {
+                "type": "object",
+                "properties": {
+                  "importPath": {
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "importPath"
+                ],
+                "additionalProperties": false
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "default": {}
+        }
+      },
+      "additionalProperties": false
+    }
+  },
+  "$schema": "http://json-schema.org/draft-07/schema#"
+}

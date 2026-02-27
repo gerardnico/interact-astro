@@ -1,6 +1,6 @@
 let
   pkgs = import <nixpkgs> { config = {}; overlays = []; };
-  nodejs = pkgs.nodejs_20;
+  nodejs = pkgs.nodejs_22;
 in
 
 pkgs.mkShellNoCC {

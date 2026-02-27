@@ -1,5 +1,5 @@
 ---
-import themeConfig, {config} from "@config"
+import themeConfig, {config} from "@gerardnico/interact-config"
 import {PAGE_CONTAINER} from "../style/classNames";
 interface Props extends Frontmatter {
 }
@@ -29,13 +29,13 @@ if (containerMaxWidth != undefined) {
 `
 }
 import globalCSS from '../style/global.css?url';
-import {Frontmatter, LayoutProps} from "../../../types";
+import {Frontmatter} from "../../../types";
 // Page Title
 const url = new URL(Astro.request.url);
 const isRoot = url.pathname === '/';
 let headPageTitle = title ? title : "";
 if (!headPageTitle && isRoot) {
-    headPageTitle = themeConfig.site.title
+    headPageTitle = themeConfig.site.title || 'Default'
 }
 let pageTitle = headPageTitle + " | " + themeConfig.site.name
 ---
@@ -48,7 +48,7 @@ let pageTitle = headPageTitle + " | " + themeConfig.site.name
     {description &&
             <meta name="description" content={description}>}
     <title>{pageTitle}</title>
-    {Object.entries(themeConfig.site.favicons).map(([faviconPath, faviconProperties]) => (
+    {themeConfig.site.favicons && Object.entries(themeConfig.site.favicons).map(([faviconPath, faviconProperties]) => (
             <link
                     rel={faviconProperties.rel}
                     href={faviconProperties.image?.href ? faviconProperties.image.href : `/${faviconPath}`}
@@ -62,14 +62,11 @@ let pageTitle = headPageTitle + " | " + themeConfig.site.name
     {keyWords &&
             <meta name="keywords" content={keyWords}>}
     <!-- Template can inject head components: https://docs.astro.build/en/basics/astro-components/#transferring-slots -->
-    <slot name="head" />
+    <slot name="head"/>
     <!-- Bootstrap CSS -->
     <link
-            href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
-            rel="stylesheet"
-            integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
-            crossorigin="anonymous"
-    />
+            href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
+            integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
     <style set:html={style}/>
     <link rel="stylesheet" href={globalCSS}>

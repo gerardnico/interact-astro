@@ -7,6 +7,7 @@
       "DOM",
       "DOM.Iterable"
     ],
+    "types": ["astro/client"],
     "moduleResolution": "Bundler",
     "declaration": true,
     "declarationMap": true,
@@ -21,10 +22,6 @@
     "isolatedModules": true,
     "jsx": "react-jsx",
     "jsxImportSource": "react",
-    "baseUrl": ".",
-    "paths": {
-      "@config": ["src/config/index.ts"]
-    }
   },
   "include": [
     "src/**/*"

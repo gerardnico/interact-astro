@@ -1,7 +1,9 @@
 ---
-import {LayoutProps} from "../../types";
+import type {LayoutProps} from "../../types";
 import HolyMedium from "./HolyMedium.astro";
 interface Props extends LayoutProps{}
 const props = Astro.props;
 ---
-<HolyMedium {...props.frontmatter}/>
+<HolyMedium {...props.frontmatter}>
+    <slot/>
+</HolyMedium>

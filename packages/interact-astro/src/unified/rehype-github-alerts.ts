@@ -2,17 +2,16 @@
 // https://github.com/rehypejs/rehype-github/tree/main/packages/alert
 // to set Bootstrap class
 import type {Root, Element, Nodes} from 'hast'
-/**
- * @typedef Icon
- * @property {string} d
- * @property {string} name
- */
+
 
 import {whitespace} from 'hast-util-whitespace'
 import {visit} from 'unist-util-visit'
 
-/** @type {Map<string, Icon>} */
-const icons = new Map()
+type Icon = {
+    d: string
+    name: string
+}
+const icons: Map<string, Icon> = new Map()
 
 
 icons.set('caution', {
@@ -45,11 +44,6 @@ icons.set('warning', {
 export default function rehypeGithubAlert() {
     /**
      * Transform.
-     *
-     * @param {Root} tree
-     *   Tree.
-     * @returns {undefined}
-     *   Nothing.
      */
     return function transformer(tree: Root) {
         visit(tree, 'element', function (node: Element, index, parent) {
@@ -145,12 +139,12 @@ export default function rehypeGithubAlert() {
             const displayName = name.charAt(0).toUpperCase() + name.slice(1)
 
             let alterName = name;
-            let extraClassName=''
+            let extraClassName = ''
             if (name === 'important') {
                 extraClassName = 'bg-danger-subtle'
             }
             if (name === 'tip') {
-                extraClassName='bg-warning-subtle'
+                extraClassName = 'bg-warning-subtle'
             }
 
 

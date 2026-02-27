@@ -1,8 +1,7 @@
 // src/config/index.ts
 import path from 'path';
 import {readFile} from 'fs/promises';
-import {type Config, ConfigSchema, FaviconSetSchemaType} from "./configSchema";
-import {z} from 'astro/zod';
+import {type Config, ConfigSchema, FaviconSetSchemaType} from "./configSchema.js";
 import fs from 'fs'
 
 /**
@@ -46,7 +45,7 @@ let defaultFavicons: FaviconSetSchemaType = {
     }
 };
 
-function updateFavicon(favicons: FaviconSetSchemaType): FaviconSetSchemaType {
+function updateFavicon(favicons?: FaviconSetSchemaType): FaviconSetSchemaType {
     if(!favicons){
         favicons={}
     }

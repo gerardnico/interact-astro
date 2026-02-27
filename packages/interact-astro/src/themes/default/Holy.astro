@@ -1,26 +1,37 @@
 ---
 import Head from './partials/Head.astro';
 import Toc from "./partials/Toc.astro";
+import NavBar from "./partials/NavBar.astro";
 import MainSide from "./partials/MainSide.astro";
 import type {Frontmatter, LayoutProps} from "../../types";
 import {PAGE_CONTAINER} from "./style/classNames";
-interface Props extends Frontmatter {}
+interface Props {
+    frontmatter: Frontmatter
+    headings: MarkdownHeading[]
+}
 const props = Astro.props;
-import themeConfig from "@config"
+import themeConfig from "@gerardnico/interact-config"
+import type {MarkdownHeading} from "@astrojs/markdown-remark";
 ---
 <!doctype html>
 <html lang="en" dir="ltr">
-<Head {...props}/>
+<Head {...props.frontmatter}/>
 <body>
+<NavBar/>
 <div id="page-core" class={PAGE_CONTAINER + " " + themeConfig.layouts.page.containerClass + " position-relative mt-3"}>
     <aside id="page-side" class="d-print-none">
         <MainSide {...props}/>
     </aside>
     <main id="page-main">
         <header id="main-header">
-            <h1 class="h1 outline-heading-cs heading-cs heading-h1-cs">{props.title}</h1>
+            {props.frontmatter.title &&
+
+                    <h1 class="h1 outline-heading-cs heading-cs heading-h1-cs">{props.frontmatter.title}</h1>
+            }
         </header>
-        <Toc {...props}/>
+        <div id="main-toc">
+            <Toc headings={props.headings}/>
+        </div>
         <div id="main-content">
             <slot/>
         </div>

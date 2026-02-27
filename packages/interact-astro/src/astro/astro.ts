@@ -1,10 +1,12 @@
+/// <reference path="../types/index.d.ts" />
+
 import type {AstroIntegration} from 'astro';
 import mdx from '@astrojs/mdx';
 import react from '@astrojs/react';
 import sitemap from '@astrojs/sitemap';
 import type {LayoutProps} from "../types";
 import {astroHookConfigSetup} from "./astro-hook-config-setup";
-import {config as interactConfig} from "../config"
+import {config as interactConfig} from "@gerardnico/interact-config"
 
 export type {LayoutProps}
 import type {HookParameters} from 'astro';
@@ -18,7 +20,7 @@ import type {HookParameters} from 'astro';
 function interact(): AstroIntegration {
 
     return {
-        name: '@combostrap/interact',
+        name: '@gerardnico/interact',
         hooks: {
             // Run at config setup time
             // https://docs.astro.build/en/reference/integrations-reference/#astroconfigsetup
@@ -64,7 +66,7 @@ function interact(): AstroIntegration {
 function siteMapConfig(): AstroIntegration {
 
     return {
-        name: '@combostrap/interact-site-map',
+        name: '@gerardnico/interact-site-map',
         hooks: {
             'astro:config:setup': async function (params: HookParameters<'astro:config:setup'>) {
                 const {updateConfig} = params;
@@ -87,6 +89,9 @@ const interactPreset = () => [
     siteMapConfig(),
     sitemap(),
     mdx(),
-    react()
+    react({
+        // https://docs.astro.build/en/guides/integrations-guide/react/#children-parsing
+        experimentalReactChildren: false
+    })
 ]
 export default interactPreset;

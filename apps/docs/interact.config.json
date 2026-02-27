@@ -1,0 +1,32 @@
+{
+  "$schema": "../../packages/interact-config/resources/schemas/interact.schema.json",
+  "theme": {
+    "site": {
+      "name": "Interact Astro",
+      "title": "An interact Astro experiment",
+      "masterFavicon": "public/letter-n-icon.svg"
+    },
+    "layouts": {
+      "navBar": {
+        "brandName": "Interact",
+        "logo": {
+          "src": "/letter-n-icon.svg",
+          "alt": "interact",
+          "width": 20,
+          "height": 20
+        }
+      },
+      "page": {
+        "containerClass": "container-sm"
+      }
+    },
+    "colors": {
+      "primary": "#c14b0b"
+    }
+  },
+  "plugins": {
+    "remark-frontmatter-modified-time": null,
+    "remark-mdx-component-import": null
+  }
+
+}

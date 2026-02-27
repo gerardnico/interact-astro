@@ -1,25 +1,33 @@
 {
-  "name": "@combostrap/interact-astro",
+  "name": "@gerardnico/interact-astro",
   "version": "0.1.0",
   "description": "Interact Astro Integration",
   "type": "module",
   "exports": {
     ".": "./src/astro/astro.ts",
     "./astro": "./src/astro/astro.ts",
-    "./config": "./src/config/index.ts",
-    "./components/Avatar": "./src/components/Avatar/Avatar.astro",
+    "./components/Avatar": "./src/components/Avatar/Avatar.tsx",
+    "./components/Anchor": "./src/components/Anchor/Anchor.tsx",
     "./components/H2": "./src/components/H2/H2.tsx",
     "./components/H3": "./src/components/H3/H3.tsx",
     "./components/Block": "./src/components/Block/Block.tsx",
     "./components/Grid": "./src/components/Grid/Grid.tsx",
     "./components/GridCell": "./src/components/GridCell/GridCell.tsx",
+    "./components/Image": "./src/components/Image/Image.tsx",
     "./components/Text": "./src/components/Text/Text.tsx",
     "./components/Para": "./src/components/Para/Para.tsx",
     "./components/StarRating": "./src/components/StarRating/StarRating.tsx",
     "./components/RufflePlayer": "./src/components/RufflePlayer/RufflePlayer.tsx",
-    "./themes/default/Hamburger": "./src/themes/default/Hamburger.astro",
-    "./themes/default/Landing": "./src/themes/default/Landing.astro"
+    "./layout/Hamburger": "./src/themes/default/Hamburger.astro",
+    "./layout/HamburgerMd": "./src/themes/default/HamburgerMd.astro",
+    "./layout/Landing": "./src/themes/default/Landing.astro",
+    "./layout/LandingMd": "./src/themes/default/LandingMd.astro",
+    "./layout/Index": "./src/themes/default/Index.astro",
+    "./layout/IndexMd": "./src/themes/default/IndexMd.astro",
+    "./layout/Holy": "./src/themes/default/Holy.astro",
+    "./layout/HolyMd": "./src/themes/default/HolyMd.astro"
   },
+  "types": "src/types/index.d.ts",
   "files": [
     "src"
   ],
@@ -32,25 +40,34 @@
     "remark"
   ],
   "peerDependencies": {
-    "astro": "5.16.9"
+    "astro": "*",
+    "react": "*",
+    "react-dom": "*",
+    "vite": "*"
   },
   "dependencies": {
-    "@astrojs/mdx": "^4.3.13",
-    "@astrojs/react": "^4.4.2",
-    "@astrojs/sitemap": "^3.7.0",
+    "@astrojs/mdx": "*",
+    "@astrojs/react": "*",
+    "@astrojs/sitemap": "*",
+    "@gerardnico/interact-config": "workspace:^",
+    "@svgr/core": "^8.1.0",
+    "@svgr/plugin-jsx": "^8.1.0",
+    "@svgr/plugin-svgo": "^8.1.0",
     "hast-util-whitespace": "3.0.0",
-    "react": "^19.2.4",
-    "react-dom": "^19.2.4",
-    "unist-util-visit": "5.0.0",
-    "yaml": "^2.7.0"
+    "unist-util-visit": "*",
+    "vite-plugin-svgr": "4.5.0",
+    "yaml": "*"
   },
   "devDependencies": {
-    "@types/mdast": "4.0.4",
-    "@types/react": "19.2.4",
-    "@types/react-dom": "19.2.3",
-    "astro": "5.16.9",
+    "@types/mdast": "*",
+    "@types/react": "*",
+    "@types/react-dom": "*",
+    "astro": "*",
     "mdast-util-mdx": "3.0.0",
-    "tsx": "^4.21.0",
-    "typescript": "5.9.3"
+    "react": "*",
+    "react-dom": "*",
+    "tsx": "*",
+    "typescript": "*",
+    "vite": "*"
   }
 }

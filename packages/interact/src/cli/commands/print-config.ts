@@ -1,5 +1,5 @@
 import {Command, Flags} from '@oclif/core'
-import {config as interactConfig} from '../../../../interact-astro/src/config'
+import {config as interactConfig} from '@gerardnico/interact-config'
 import yaml from 'yaml'
 
 /**

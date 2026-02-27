@@ -18,3 +18,17 @@ Default type definition are set in [lib](https://www.typescriptlang.org/tsconfig
 
 Specify the ts files to include
 https://www.typescriptlang.org/tsconfig/#include
+
+## astro/client type
+
+```json
+{
+  "types": [
+    "astro/client"
+  ]
+}
+```
+so that I get no error with the `astro:assets` virtual modules
+```typescript
+import { getImage, imageConfig, type LocalImageProps, type RemoteImageProps } from 'astro:assets';
+```
