@@ -30,16 +30,30 @@ if (containerMaxWidth != undefined) {
 }
 import globalCSS from '../style/global.css?url';
 import {Frontmatter} from "../../../types";
+
+//
 // Page Title
+//
 const url = new URL(Astro.request.url);
-const isRoot = url.pathname === '/';
+const base = themeConfig.site.base
+const isRoot = url.pathname === base;
 let headPageTitle = title ? title : "";
 if (!headPageTitle && isRoot) {
     headPageTitle = themeConfig.site.title || 'Default'
 }
 let pageTitle = headPageTitle + " | " + themeConfig.site.name
-// base so that relative path are calculated relative to this URL
-let base = url + (themeConfig.site.base || '');
+
+//
+// head base meta
+// so that relative path are calculated relative to this URL
+//
+// The URL of the page requested so that relative path and anchor are calculated from it
+let baseHeadURL = Astro.request.url;
+if (isRoot) {
+    // In the root, we need to add a slash otherwise the relative path is calculated
+    // to the previous path
+    baseHeadURL = `${base}/`;
+}
 ---
 <head>
     <meta charset="UTF-8"/>
@@ -47,7 +61,7 @@ let base = url + (themeConfig.site.base || '');
     <!-- https://docs.astro.build/en/reference/api-reference/#generator -->
     <meta name="generator" content={Astro.generator}/>
     <meta name="generator" content="Interact"/>
-    <base href={base}>
+    <base href={baseHeadURL}>
     {description &&
             <meta name="description" content={description}>}
     <title>{pageTitle}</title>
