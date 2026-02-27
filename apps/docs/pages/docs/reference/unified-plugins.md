@@ -1,6 +1,6 @@
 # Unified Plugins
 
-The list of plugins can be found at [unified](../../../../../packages/interact-astro/src/unified)
+The list of plugins can be found at [unified](https://github.com/gerardnico/interact-astro/tree/main/packages/interact-astro/src/unified)
 
 ## How to disable a plugin
 

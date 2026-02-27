@@ -1,6 +1,9 @@
-## React Svg
+---
+layout: holy
+title: Import React Svg
+---
 
-In a React component, you can import a svg as React component with
+In a React component, you can import a svg as React component with the `?react`
 
 ```javascript
 import DatacadamiaLogo from '../../img/database.svg?react'

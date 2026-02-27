@@ -1,4 +1,7 @@
-# Interact CLI
+---
+layout: holy
+title: Interact CLI
+---
 
 A command-line interface for running development and build scripts.
 

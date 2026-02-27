@@ -1,7 +1,13 @@
-## Add Extra Layout and React Svg Support
+---
+layout: holy
+title: Typescript Support
+---
+
 
 You need to add `astro.config.mjs` to get automatic TypeScript support
-for [React Svg](svg.md)
+
+* for [React Svg](svg.md)
+* and [Layout Props](layout.md)
 
 ```json
 {

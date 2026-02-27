@@ -94,4 +94,7 @@ The first [tips and tricks](https://docs.astro.build/en/guides/troubleshooting/)
 
 You don't build a framework on top of a framework, you build it on top of a bundler.
 
-Astro is built on top of Vite by the way
+Astro is a Vite wrapper.
+
+<img src="/astro-and-vite-build.png alt="Astro and Vite Build" command"/>
+
