@@ -5,7 +5,14 @@ title: The layout system
 
 ## How it works?
 
-Astro has the possibility to pass a layout props in `Markdown`.
+Astro has the possibility to pass a layout props frontmatter in `Markdown`.
+
+Example for the [Holy layout](https://github.com/gerardnico/interact-astro/blob/main/packages/interact-astro/src/themes/default/Holy.astro)
+```markdown
+---
+layout: holy
+---
+```
 
 We hacked on that with:
 

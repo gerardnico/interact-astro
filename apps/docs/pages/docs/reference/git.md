@@ -1,11 +1,10 @@
-# Git
+---
+layout: holy
+title: Git
+---
 
+## Adapt your .gitattributes to accept image
 
-## Support
-
-### warning: in the working copy of 'image.png', CRLF will be replaced by LF the next time Git touches it
-
-Adapt your `.gitattributes`
 ```
 *.png binary
 *.jpg binary
@@ -19,3 +18,9 @@ Adapt your `.gitattributes`
 *.bat text eol=crlf
 * text eol=lf
 ```
+
+## Support
+
+### Warning: in the working copy of 'image.png', CRLF will be replaced by LF the next time Git touches it
+
+See [adapt-your-gitattributes-to-accept-image](#adapt-your-gitattributes-to-accept-image)

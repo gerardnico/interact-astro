@@ -3,31 +3,33 @@ layout: holy
 title: Interact on top of Astro project
 ---
 
-This project was an attempt to build a documentation framework on top of Astro
-with:
+This website is the documentation of the [interact-astro project](https://github.com/gerardnico/interact-astro). It was an attempt to build
+the [combo wiki documentation framework](https://www.combostrap.com) on top of
+Astro with:
 
 * layout
 * image processing
 * and interactive component
 
-## Why Not Astro for a framework
-
-See [Why Not](why-not.md)
+This page was even deployed with the [developed interact cli](docs/reference/cli.md) via
+a [GitHub deployment workflow](https://github.com/gerardnico/interact-astro/blob/main/.github/workflows/deploy.yml)
 
 ## The elements developed
 
-At its core, interact astro is an [astro integration plugin](docs/reference/astro.md) with:
+At its core, [Interact-astro project](https://github.com/gerardnico/interact-astro) is an [astro integration plugin](docs/reference/astro.md) with:
 
-* a [cli](docs/reference/cli.md) on top of Astro
+* a [cli](docs/reference/cli.md)
 * a [layout system](docs/reference/layout.md)
 * the import of [Svg as React component](docs/reference/svg.md)
 * [favicons generation](docs/reference/favicons.md)
 * [various unified plugin to change Markdown and mdx parsing](docs/reference/unified-plugins.md)
 * [various Publication Components](https://github.com/gerardnico/interact-astro/tree/main/packages/interact-astro/src/components)
-  such
-  * as
-    the [React Image component on top of Astro service](https://github.com/gerardnico/interact-astro/blob/main/packages/interact-astro/src/components/Image/Image.tsx)
+* [React Image component on top of Astro](docs/reference/image.md)
 * a [Website GitHub deployment workflow with the Interact cli](https://github.com/gerardnico/interact-astro/blob/main/.github/workflows/deploy.yml)
+
+## Why Astro is not a good fit for a framework
+
+See the dedicated page: [Why Not Astro from a framework development](why-not.md)
 
 ## More documentation?
 
